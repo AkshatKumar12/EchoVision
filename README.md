@@ -61,3 +61,20 @@ EchoVision/
 ├── .gitattributes                  # Git LFS tracking configuration for large files
 ├── EchoVIsion_1.h5                 # Legacy Keras/TensorFlow model weights
 └── README.md
+
+```
+## Setup and Installation
+
+### 1. Clone the Repository
+Because this repository uses Git Large File Storage (Git LFS) to manage the 340MB ViT model weights, ensure Git LFS is installed on your local system before cloning.
+
+```bash
+git lfs install
+git clone [https://github.com/AkshatKumar12/EchoVision.git](https://github.com/AkshatKumar12/EchoVision.git)
+cd EchoVision
+
+
+pip install torch transformers datasets accelerate scikit-learn Pillow
+
+
+python Latest_Release/predict.py path/to/your/test_image.jpg
