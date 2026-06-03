@@ -1,53 +1,50 @@
 # EchoVision
-## Project Description
 
-EchoVision is an AI-based human activity recognition system designed to assist visually impaired users. By analyzing images captured from cameras or videos, the system can detect human actions and convert the outputs into audio alerts, enabling users to “see” the environment through sound.
+EchoVision is a centralized repository for computer vision models and experiments, ranging from early baseline models to state-of-the-art transformer architectures. The primary focus of this repository is image classification, feature extraction, and human action recognition.
 
-This project is particularly useful for:
+## Flagship Model: Human Action Recognition (ViT)
 
-Visually impaired individuals needing real-time environment awareness
+The latest and most accurate model in this repository is a Vision Transformer (ViT) fine-tuned for complex human action recognition.
 
-Developers exploring computer vision, deep learning, and accessibility applications
+* **Architecture:** google/vit-base-patch16-224-in21k
+* **Task:** Multi-class Image Classification (40 Classes)
+* **Dataset:** Stanford-40 Actions Dataset
+* **Frameworks:** PyTorch, Hugging Face transformers, datasets
 
-Researchers building AI-powered assistive technologies
+### Performance Metrics
 
-## Key Features
+The model was fine-tuned for 5 epochs using FP16 mixed-precision training and achieved the following results on the validation split:
 
-Human Activity Recognition
-Uses a trained CNN model (EfficientNetB0) to classify activities like walking, eating, using a phone, and more.
+| Metric | Score |
+| :--- | :--- |
+| **Validation Accuracy** | 88.53% |
+| **Validation Loss** | 1.046 |
+| **Training Loss** | 1.394 |
+| **Training Runtime** | ~18 minutes (T4x2 GPU) |
 
-Audio Feedback
-Converts recognized actions into speech output, providing real-time auditory information.
+Detailed metrics, including Precision, Recall, and Weighted F1-scores, can be found in the `Latest_release/` log files.
 
-Frame Extraction & Preprocessing
-Processes video frames or images to accurately detect activities.
+## Legacy Models
 
-Extensible
-New activity classes can be added, and the model can be retrained to improve recognition accuracy.
+This repository also serves as an archive for previous computer vision iterations and baseline models. 
 
-Lightweight & Fast
-Optimized for quick predictions on single images, making it suitable for real-time usage.
+* **[Insert Old Model 1 Name, e.g., ResNet50 Classifier]:** Brief description of the task and dataset. Accuracy: [X]%.
+* **[Insert Old Model 2 Name, e.g., Custom CNN Baseline]:** Brief description of the task and dataset. Accuracy: [X]%.
 
-## Tech Stack
+*(Note: Replace the placeholders above with the actual names and metrics of the older models currently in your repository.)*
 
-Python 3.10+
+## Repository Structure
 
-TensorFlow / Keras (EfficientNetB0 model)
-
-OpenCV (image/video processing)
-
-Pyttsx3 / gTTS (text-to-speech audio feedback)
-
-NumPy / Pandas (data handling)
-
-## How It Works
-
-Load the trained EfficientNetB0 model (efficientnetb0_har_model.h5).
-
-Feed an image or video frame into the system.
-
-The CNN model predicts the human activity.
-
-The predicted activity is converted to audio output for the user.
-
-Users receive real-time feedback about the surroundings.
+```text
+EchoVision/
+├── Latest_release/         # Weights, configs, and logs for the ViT Stanford-40 model
+│   ├── config.json
+│   ├── model.safetensors
+│   ├── preprocessor_config.json
+│   ├── eval_results.json
+│   └── train_results.json
+├── legacy_models/          # Scripts and notebooks for older computer vision models
+├── train.ipynb             # Model training and EDA notebook for the latest ViT
+├── predict.py              # Standalone inference script for the ViT
+├── requirements.txt        # Python dependencies
+└── README.md
